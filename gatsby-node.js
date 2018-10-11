@@ -1,5 +1,13 @@
 const path = require(`path`)
-const { makeBlogPath } = require(`./src/utils`)
+const dateformat = require(`dateformat`)
+// const { makeBlogPath } = require(`./src/utils`)
+
+const makeBlogPath = ({ id, createdAt, slug }) => {
+  const date = new Date(createdAt)
+  const formattedDate = dateformat(date, `yyyy-mm-dd`)
+  return `/${formattedDate}-${slug}`
+}
+
 
 exports.createPages = async ({ actions, graphql }) => {
   const { data } = await graphql(`
